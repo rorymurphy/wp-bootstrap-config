@@ -1,0 +1,4 @@
+#!/bin/bash
+
+PATH=$PATH:/opt/node/bin
+lessc $1
