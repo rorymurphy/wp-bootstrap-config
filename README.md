@@ -66,9 +66,9 @@ fields are required for Bootstrap stylesheets to compile correctly.
 
 This filter has 1 argument, an array of the following structure:
 
-    'category_name' \=\> array\(
-        'variable_name' \=\> array\(name, title, type, value, order\)
-    \)
+    'category_name' => array(
+        'variable_name' => array(name, title, type, value, order)
+    )
 
 The name field corresponds to the literal name of the variable in LESS,
 while the title is the text that will be displayed in the settings page.
