@@ -17,11 +17,11 @@ the correct path to the compiler on your system.
 The second assumption is in regards to the layout of your theme.  It is
 assumed that the folder structure follows the convention below
 
-\-\<theme directory\>
-\-\-less
-\-\-\-bootstrap.less
-\-\-\-variables.less
-\-\-\-\<other less files\>
+-   \<theme directory\>
+    *   less
+        +   bootstrap.less
+        +   variables.less
+        +   \<other less files\>
 
 This allows the tool to easily locate your Bootstrap files when it
 recompiles the stylesheet.
