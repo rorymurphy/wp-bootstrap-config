@@ -9,7 +9,9 @@ bread, you don't get to eat it.  Otherwise, it's open to the public.
 
 For Bloomberg L.P., it's subsidiaries, and successors (henceforth
 collectively referred to as Bloomberg), this software or any
-derivative work may be used only with a commercial license.
+derivative work may be used only with a commercial license.  Where
+any conflict exists, whether directly or in the licensing of a derivative, 
+this clause is controlling.
 
 For all other organizations, it is available as follows:
 
