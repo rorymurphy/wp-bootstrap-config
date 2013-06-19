@@ -128,7 +128,9 @@ class WPBootstrapConfig {
         
         foreach($settings as $category=>$items){
             foreach($items as $name=>$itm){
-                $itm['value'] = $values[$itm['name']];
+                if(array_key_exists($itm['name'], $values)){
+                    $itm['value'] = $values[$itm['name']];
+                }
                 $settings[$category][$name]=$itm;
             }
         }
@@ -173,6 +175,11 @@ class WPBootstrapConfig {
             $relpath = $this->get_relative_path($outputdir . '/', get_stylesheet_directory() . '/less');
             $bootstrap = preg_replace('/@import\s+"(.+\.less)";/', sprintf('@import "%1$s/$1";', $relpath), $bootstrap);
             $bootstrap = preg_replace('/@import\s+"(.+\/)?variables\.less";/', '@import "variables.less";', $bootstrap);            
+        }elseif(file_exists(get_template_directory() . '/less/bootstrap.less')){
+            $bootstrap = file_get_contents(get_template_directory() . '/less/bootstrap.less');
+            $relpath = $this->get_relative_path($outputdir . '/', get_template_directory() . '/less');
+            $bootstrap = preg_replace('/@import\s+"(.+\.less)";/', sprintf('@import "%1$s/$1";', $relpath), $bootstrap);
+            $bootstrap = preg_replace('/@import\s+"(.+\/)?variables\.less";/', '@import "variables.less";', $bootstrap);           
         }else{
             require_once 'bootstrap.php';
             $relpath = $this->get_relative_path($outputdir . '/', __DIR__ . '/less');
@@ -210,11 +217,12 @@ class WPBootstrapConfig {
     function filter_styles($handles){
         global $wp_styles;
         $uploaddir = $this->get_output_dir();
-        if(is_admin() || !file_exists($uploaddir . '/bootstrap.css')){return $handles;}
+        $filename = $uploaddir . '/bootstrap.css';
+        if(is_admin() || !file_exists($filename)){return $handles;}
         foreach($handles as $h){
             $s = $wp_styles->registered[$h];
             if($h === 'bootstrap'){
-                $s->src = $this->get_output_url() . '/bootstrap.css';
+                $s->src = $this->get_output_url() . '/bootstrap.css?cachetoken=' . filemtime($filename);
             }
         }
         
