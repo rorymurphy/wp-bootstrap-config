@@ -29,6 +29,8 @@ class WPBootstrapConfig {
     {
         $screen = get_current_screen();
         if($screen->base=='appearance_page_wp_bootstrap_config'){
+            wp_deregister_script('jquery');
+            wp_enqueue_script('jquery', plugin_dir_url(__FILE__) . 'js/jquery-1.8.3.min.js', null, '1.8.3');
             wp_enqueue_style('wp-bootstrap-config', plugin_dir_url(__FILE__) . 'css/wp_bootstrap_config.css');
             //wp_enqueue_script('underscore', plugin_dir_url(__FILE__) . 'js/underscore.js');
             wp_enqueue_script('underscore');
@@ -157,7 +159,7 @@ class WPBootstrapConfig {
 
         /* To be implemented in a future version */
 //        $versions[] = $timestamp;
-//        update_option(self::CURRENT_SETTINGS_OPTION, $values);
+        update_option(self::CURRENT_SETTINGS_OPTION, $values);
 //        update_option(sprintf(self::SETTINGS_VERSION_PATT, $timestamp), $values);
 //        update_option(self::VERSIONS_OPTION, $versions);
         $outputdir = $this->get_output_dir();
@@ -185,6 +187,9 @@ class WPBootstrapConfig {
             $relpath = $this->get_relative_path($outputdir . '/', __DIR__ . '/less');
             $bootstrap = generate_bootstrap_less_file($relpath, $options);
         }
+        $relpath = $this->get_relative_path($outputdir . '/', get_stylesheet_directory());
+        
+        
         file_put_contents($outputdir . '/bootstrap.less', $bootstrap);
         
         $command = sprintf('%1$s %2$s/bootstrap.less', LESS_COMMAND, $outputdir);
@@ -194,6 +199,8 @@ class WPBootstrapConfig {
         if($bootstrap== null || strlen($bootstrap) === 0){
             print '<div class="error"><p>An error occurred while compiling LESS</p></div>';
         }else{
+            $matches = array();
+            $bootstrap = preg_replace('/url\s*\(["\']?([^\'"\)]+)["\']?\)/', sprintf('url("%1$s/$1")', $relpath), $bootstrap);
             $filename = sprintf('%1$s/bootstrap-%2$s.css', $outputdir, $timestamp);
             file_put_contents($outputdir . '/bootstrap.css', $bootstrap);
             file_put_contents($filename, $bootstrap);

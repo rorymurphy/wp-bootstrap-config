@@ -18,7 +18,7 @@ jQuery(document).ready(function($){
         });
     });
     
-    $('[data-toggle="tooltip"]').tooltip({html: false, container: 'body'});
+    $('[data-toggle="tooltip"]').tooltip({html: false, container: 'div.wrap'});
 });
 
 (function($){
