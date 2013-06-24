@@ -27,6 +27,8 @@ assumed that the folder structure follows the convention below
         +   bootstrap.less
         +   variables.less
         +   \<other less files\>
+    *   bootstrap.css
+    *   style.css
 
 This allows the tool to easily locate your Bootstrap files when it
 recompiles the stylesheet.  The last prerequisite is fairly
