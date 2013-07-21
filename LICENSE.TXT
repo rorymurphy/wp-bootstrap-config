@@ -1,10 +1,9 @@
 Copyright 2013 Rory Murphy
 
 The short answer to the question of license is that for almost
-everyone, this library is available under Apache 2.0 terms.  There
+everyone, this library is available under MIT terms.  There
 are a few exceptions noted below.  Basically, I used to work there
-and could not get even a day of time to build this, so as the story
- of the Little Red Hen illustrates, if you refuse to help make the
+and could not get even a day of time to build this, so if you refuse to help make the
 bread, you don't get to eat it.  Otherwise, it's open to the public.
 
 For Bloomberg L.P., it's subsidiaries, and successors (henceforth
@@ -15,11 +14,11 @@ this clause is controlling.
 
 For all other organizations, it is available as follows:
 
-Licensed under the Apache License, Version 2.0 (the "License");
+Licensed under the MIT (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+    http://opensource.org/licenses/MIT
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

@@ -1,5 +1,10 @@
 <?php
-
+/*
+Author: Rory Murphy
+Version: 1.0.0
+License: Modified MIT License - See LICENSE.TXT
+For more great plugins, code snippets, and ideas, see my GitHub at https://github.com/rorymurphy/
+*/
 function generate_variables_less_file($values, $options){
     ob_start();
     ?>

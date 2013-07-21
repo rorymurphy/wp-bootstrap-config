@@ -2,9 +2,10 @@
 /*
 Plugin Name: WordPress Bootstrap Config
 Description: Gives users the power to tweak all of the settings available in the Bootstrap variables file.
-Author: IrishLagger (Rory Murphy)
+Author: Rory Murphy
+Author URI: https://github.com/rorymurphy/
 Version: 1.0.0
-License: Modified Apache License 2.0 - See LICENSE.TXT
+License: Modified MIT License - See LICENSE.TXT
 */
 
 require_once('fields.php');
