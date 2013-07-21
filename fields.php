@@ -224,12 +224,12 @@ function get_bootstrap_default_settings(){
             '@gridGutterWidth768' => array('name' => '@gridGutterWidth768', 'title' => 'Grid Gutter Width (768px to 979px width)', 'type' => 'size', 'value' => '20px', 'order'=> 10),
             '@gridRowWidth768' => array('name' => '@gridRowWidth768', 'title' => 'Grid Row Width (768px to 979px width)', 'type' => 'size', 'value' => '(@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1))', 'order'=> 20, editable=>false),
             
-            '@fluidGridColumnWidth' => array('name' => '@fluidGridColumnWidth', 'title' => 'Fluid Grid Column Width', 'type' => 'size', 'value' => '(@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1))', 'order'=> 20, editable=>false),
-            '@fluidGridGutterWidth' => array('name' => '@fluidGridGutterWidth', 'title' => 'Fluid Grid Gutter Width', 'type' => 'size', 'value' => '(@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1))', 'order'=> 20, editable=>false),
-            '@fluidGridColumnWidth1200' => array('name' => '@fluidGridColumnWidth1200', 'title' => 'Fluid Grid Column Width (1200px min width)', 'type' => 'size', 'value' => '(@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1))', 'order'=> 20, editable=>false),
-            '@fluidGridGutterWidth1200' => array('name' => '@fluidGridGutterWidth1200', 'title' => 'Fluid Grid Gutter Width (1200px min width)', 'type' => 'size', 'value' => '(@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1))', 'order'=> 20, editable=>false),
-            '@fluidGridColumnWidth768' => array('name' => '@fluidGridColumnWidth768', 'title' => 'Fluid Grid Column Width (768px to 979px width)', 'type' => 'size', 'value' => '(@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1))', 'order'=> 20, editable=>false),
-            '@fluidGridGutterWidth768' => array('name' => '@fluidGridGutterWidth768', 'title' => 'Fluid Grid Gutter Width (768px to 979px width)', 'type' => 'size', 'value' => '(@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1))', 'order'=> 20, editable=>false)
+            '@fluidGridColumnWidth' => array('name' => '@fluidGridColumnWidth', 'title' => 'Fluid Grid Column Width', 'type' => 'size', 'value' => 'percentage(@gridColumnWidth/@gridRowWidth)', 'order'=> 30, editable=>false),
+            '@fluidGridGutterWidth' => array('name' => '@fluidGridGutterWidth', 'title' => 'Fluid Grid Gutter Width', 'type' => 'size', 'value' => 'percentage(@gridGutterWidth/@gridRowWidth)', 'order'=> 30, editable=>false),
+            '@fluidGridColumnWidth1200' => array('name' => '@fluidGridColumnWidth1200', 'title' => 'Fluid Grid Column Width (1200px min width)', 'type' => 'size', 'value' => 'percentage(@gridColumnWidth1200/@gridRowWidth1200)', 'order'=> 30, editable=>false),
+            '@fluidGridGutterWidth1200' => array('name' => '@fluidGridGutterWidth1200', 'title' => 'Fluid Grid Gutter Width (1200px min width)', 'type' => 'size', 'value' => 'percentage(@gridGutterWidth1200/@gridRowWidth1200)', 'order'=> 30, editable=>false),
+            '@fluidGridColumnWidth768' => array('name' => '@fluidGridColumnWidth768', 'title' => 'Fluid Grid Column Width (768px to 979px width)', 'type' => 'size', 'value' => 'percentage(@gridColumnWidth768/@gridRowWidth768)', 'order'=> 30, editable=>false),
+            '@fluidGridGutterWidth768' => array('name' => '@fluidGridGutterWidth768', 'title' => 'Fluid Grid Gutter Width (768px to 979px width)', 'type' => 'size', 'value' => 'percentage(@gridGutterWidth768/@gridRowWidth768)', 'order'=> 30, editable=>false)
         )
     );
 

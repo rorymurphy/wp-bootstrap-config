@@ -9,7 +9,12 @@ License: Modified Apache License 2.0 - See LICENSE.TXT
 
 require_once('fields.php');
 
-define('LESS_COMMAND', __DIR__ . '/lessc');
+if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+    define('LESS_COMMAND', __DIR__ . '/lessc.bat');
+} else {
+    define('LESS_COMMAND', __DIR__ . '/lessc');
+}
+
 class WPBootstrapConfig {
     const CURRENT_SETTINGS_OPTION = 'wp-bootstrap-config-settings';
     const VERSIONS_OPTION = 'wp-bootstrap-config-versions';
@@ -173,21 +178,26 @@ class WPBootstrapConfig {
         file_put_contents($filename, $bootstrap);
         
         if(file_exists(get_stylesheet_directory() . '/less/bootstrap.less')){
-            $bootstrap = file_get_contents(get_stylesheet_directory() . '/less/bootstrap.less');
-            $relpath = $this->get_relative_path($outputdir . '/', get_stylesheet_directory() . '/less');
-            $bootstrap = preg_replace('/@import\s+"(.+\.less)";/', sprintf('@import "%1$s/$1";', $relpath), $bootstrap);
-            $bootstrap = preg_replace('/@import\s+"(.+\/)?variables\.less";/', '@import "variables.less";', $bootstrap);            
+            $source_dir = get_stylesheet_directory();
+          
         }elseif(file_exists(get_template_directory() . '/less/bootstrap.less')){
-            $bootstrap = file_get_contents(get_template_directory() . '/less/bootstrap.less');
-            $relpath = $this->get_relative_path($outputdir . '/', get_template_directory() . '/less');
+            $source_dir = get_template_directory();          
+        }
+        
+        if(isset($source_dir)){
+            $source_less = $source_dir . '/less';
+            $source = $source_less . '/bootstrap.less';
+            $bootstrap = file_get_contents($source);
+            $relpath = $this->get_relative_path($outputdir . '/', $source_less);
             $bootstrap = preg_replace('/@import\s+"(.+\.less)";/', sprintf('@import "%1$s/$1";', $relpath), $bootstrap);
-            $bootstrap = preg_replace('/@import\s+"(.+\/)?variables\.less";/', '@import "variables.less";', $bootstrap);           
+            $bootstrap = preg_replace('/@import\s+"(.+\/)?variables\.less";/', '@import "variables.less";', $bootstrap);             
         }else{
             require_once 'bootstrap.php';
             $relpath = $this->get_relative_path($outputdir . '/', __DIR__ . '/less');
             $bootstrap = generate_bootstrap_less_file($relpath, $options);
         }
-        $relpath = $this->get_relative_path($outputdir . '/', get_stylesheet_directory());
+        
+        $relpath = $this->get_relative_path($outputdir . '/', $source_dir);
         
         
         file_put_contents($outputdir . '/bootstrap.less', $bootstrap);
@@ -197,7 +207,8 @@ class WPBootstrapConfig {
         $bootstrap = shell_exec($command);
         //var_dump($bootstrap);
         if($bootstrap== null || strlen($bootstrap) === 0){
-            print '<div class="error"><p>An error occurred while compiling LESS</p></div>';
+            $error = shell_exec(sprintf('%1$s %2$s/bootstrap.less 2>&1 1> /dev/null', LESS_COMMAND, $outputdir));
+            printf('<div class="error"><p>An error occurred while compiling LESS. Message: %1$s </p></div>', $error);
         }else{
             $matches = array();
             $bootstrap = preg_replace('/url\s*\(["\']?([^\'"\)]+)["\']?\)/', sprintf('url("%1$s/$1")', $relpath), $bootstrap);
