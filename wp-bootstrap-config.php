@@ -230,7 +230,9 @@ class WPBootstrapConfig {
     
     function get_output_url(){
         $uploaddir = wp_upload_dir();
-        return $uploaddir['baseurl'] . '/wp-bootstrap-config';        
+        $result = $uploaddir['baseurl'] . '/wp-bootstrap-config';
+        $result = is_ssl()?str_replace('http://', 'https://', $result):$result;
+        return $result;
     }
 
     function filter_styles($handles){
